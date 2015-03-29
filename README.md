@@ -3,6 +3,10 @@ Ate
 
 Atractive Template Engine for minimalist people
 
+## Introduction
+
+Template engines are things of all days. This days most of them have several hundred (erb) if not thousand (erubis) of lines of code, even slim isn't so slim. So, Ate was written with the requirements of be simple and easy to use.
+
 ## Installation
 
 Installing Ate is as simple as running:
@@ -13,6 +17,8 @@ $ gem install ate
 
 Usage
 -----
+
+Is very similar than other template engines for Ruby as Liquid, Mote, etc:
 
 ```ruby
 template = Ate.parse("Hello World")
@@ -88,7 +94,7 @@ template.render #=> "Hi, I'm Julio"
 
 ## Using files
 
-In order to use Ate for a view, use the suffix `.ate`, `.erb`, e.g. `public/index.html.ate` and add the route of your file in the parse method. Feel free to use any markup language as HTML
+In order to use Ate for a view, use the suffix `.ate`, e.g. `public/index.html.ate` and add the route of your file in the parse method. Feel free to use any markup language as HTML
 
 ```html
 <!-- public/index.html.ate -->
@@ -101,5 +107,5 @@ In order to use Ate for a view, use the suffix `.ate`, `.erb`, e.g. `public/inde
 ```
 
 ```ruby
-parsed = Ate.parse("public/index.html.ate", main_title: "h1 title!", posts: array_of_posts)
+template = Ate.parse("public/index.html.ate", main_title: "h1 title!", posts: array_of_posts)
 ```
