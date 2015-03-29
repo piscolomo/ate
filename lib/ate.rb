@@ -1,11 +1,11 @@
 class Ate
   class << self
     def parse(template, vars = {})
-      context = vars.fetch(:context, nil)
+      context = vars.fetch(:context, self)
       lines = template.end_with?(".ate") ? File.read(template) : template
       lines = lines.split("\n")
       built = build_proc(lines, vars)
-      @parsed = context ? context.instance_eval(built) : eval(built)
+      @parsed = context.instance_eval(built)
       self
     end
 
