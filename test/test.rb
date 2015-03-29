@@ -61,16 +61,32 @@ scope do
     assert_equal "  Beetlejuice\n  Beetlejuice\n  Beetlejuice\n", parsed.call
   end
 
-  test "variables" do
+  test "int variables" do
     template = (<<-EOT).gsub(/ {4}/, "")
     % number.times {
-    Pika
+    Pika {{type}}
     % }
     EOT
 
-    example = Ate.parse(template, "number")
+    example = Ate.parse(template, number: 3, type: 1000)
     number = 3
-    assert_equal "Pika\nPika\nPika\n", example.call(3)
+    assert_equal "Pika 1000\nPika 1000\nPika 1000\n", example.call
+  end
+
+  test "string variables" do
+    example = Ate.parse("Hello {{name}}", name: "Julio")
+    assert_equal "Hello Julio\n", example.call
+  end
+
+  test "mixing int and str variables" do
+    template = (<<-EOT).gsub(/ {4}/, "")
+    % n.times {
+    {{ pokemon_name }}
+    % }
+    EOT
+
+    example = Ate.parse(template, n: 3, pokemon_name: "Pikachu")
+    assert_equal "Pikachu\nPikachu\nPikachu\n", example.call
   end
 
   test "loading a file" do

@@ -1,11 +1,16 @@
 class Ate
 
-  def self.parse(template, vars = "")
+  def self.parse(template, vars = {})
     lines = template.end_with?(".ate") ? File.read(template) : template
     lines = lines.split("\n")
 
-    proc = "Proc.new do |#{vars}| \n "
+    proc = "Proc.new do \n "
     proc << "output = \"\" \n "
+
+    vars.each do |x, y|
+      value = y.is_a?(String) ? "\"#{y}\"" : y
+      proc << "#{x} = #{value}\n"
+    end
 
     lines.each do |line|
       if line =~ /^\s*(%)(.*?)$/
