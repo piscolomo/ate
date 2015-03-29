@@ -147,14 +147,14 @@ scope do
     assert_equal "<html>\n  <head>\n<title>Cool Site!</title>\n  </head>\n</html>\n", parsed.render
   end
 
-  # test "preserve XML directives" do
-  #   template = (<<-EOT).gsub(/ {4}/, "")
-  #   <?xml "hello" ?>
-  #   EOT
+  test "soporting XML" do
+    template = (<<-EOT).gsub(/ {4}/, "")
+    <?xml "hello xml" ?>
+    EOT
 
-  #   parsed = Ate.parse("probando nuevo mundo \"yeah baby\" ")
-  #   assert_equal "<?xml \"hello\" ?>\n", parsed.render
-  # end
+    parsed = Ate.parse(template)
+    assert_equal "<?xml \"hello xml\" ?>\n", parsed.render
+  end
 
   test "loading a file" do
     assert_equal "  Beetlejuice\n  Beetlejuice\n  Beetlejuice\n", Ate.parse("test/example.ate").render
