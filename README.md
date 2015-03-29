@@ -72,7 +72,7 @@ parsed = Ate.parse(template, items: ["a", "b", "c"])
 parsed.render #=> "a\nb\n\c"
 ```
 
-You can even take advantage of do whatever operation inside the brackets
+You can even take advantage of do whatever operation inside the `{{ }}`
 
 ```ruby
 template = Ate.parse("The new price is: {{ price + 10 }}", price: 30)
@@ -96,4 +96,15 @@ Declare you file with .ate extension in the parse method
 
 ```ruby
 template = Ate.parse("example.ate")
+```
+
+Feel free to use any markup language like HTML
+```ruby
+template = <<-EOT
+  <h1>{{ main_title }}</h1>
+  % posts.each do |post|
+    <article>...</article>
+  % end
+EOT
+parsed = Ate.parse(template, main_title: "h1 title!", posts: array_of_posts)
 ```
