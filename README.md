@@ -21,13 +21,15 @@ template = Ate.parse("Hello World")
 template.render #=> "Hello World"
 ```
 
-## Control flow
+## Ruby code
 
 Lines that start with `%` are evaluated as Ruby code.
 
 ```
 % if true
+  Hi
 % else
+  No, I won't display me
 % end
 ```
 
@@ -37,18 +39,17 @@ As this is ruby code, you can comment as you has always done
 % # I'm a comment.
 ```
 
-## Assignment
-
-To print a variable just use `{{` and `}}`
-
-
-## Block evaluation
+And you can still doing any ruby thing: blocks, loops, etc.
 
 ```
 % 3.times do |i|
   {{i}}
 % end
 ```
+
+## Assignment
+
+To print a variable just use `{{` and `}}`
 
 ## Send Variables
 
@@ -68,12 +69,19 @@ template = <<-EOT
   % end
 EOT
 parsed = Ate.parse(template, items: ["a", "b", "c"])
-parsed.render #=> "a\nb\n\c\n"
+parsed.render #=> "a\nb\n\c"
+```
+
+You can even take advantage of do whatever operation inside the brackets
+
+```ruby
+template = Ate.parse("The new price is: {{ price + 10 }}", price: 30)
+template.render #=> "The new price is: 40"
 ```
 
 ## Contexts
 
-You can even send a particular context to your template using the context key
+For send a particular context to your template, use the context key
 
 ```ruby
 user = User.new "Julio"
@@ -84,7 +92,7 @@ template.render #=> "Hi, I'm Julio"
 
 ## Using files
 
-Definitely, you can use any file with .ate extension
+Declare you file with .ate extension in the parse method
 
 ```ruby
 template = Ate.parse("example.ate")
