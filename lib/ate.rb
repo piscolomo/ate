@@ -10,25 +10,25 @@ class Ate
     end
 
     def build_proc(lines, vars)
-      @proc = "Proc.new do \n output = \"\" \n "
+      @output = "Proc.new do \n output = \"\" \n "
       declaring_local_variables(vars)
       parsing_lines(lines)
-      @proc << "output \n end"
+      @output << "output \n end"
     end
 
     def declaring_local_variables(vars)
       vars.each do |x, y|
         value = y.is_a?(String) ? "\"#{y}\"" : y
-        @proc << "#{x} = #{value}\n"
+        @output << "#{x} = #{value}\n"
       end
     end
 
     def parsing_lines(lines)
       lines.each do |line|
         if line =~ /^\s*(%)(.*?)$/
-          @proc << "#{line.gsub(/^\s*%(.*?)$/, '\1') } \n"
+          @output << "#{line.gsub(/^\s*%(.*?)$/, '\1') } \n"
         else
-          @proc << "output << \"#{line.gsub(/\{\{([^\r\n\{]*)\}\}/, '#{\1}') }\n\" \n "
+          @output << "output << \"#{line.gsub(/\{\{([^\r\n]*)\}\}/, '#{\1}') }\n\" \n "
         end
       end
     end

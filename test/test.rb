@@ -30,6 +30,11 @@ scope do
     assert_equal "4\n", parsed.render
   end
 
+  test "running an enumerator inside of {{}}" do
+    example = Ate.parse("{{ [1, 2, 3].map { |i| i * i }.join(',') }}")
+    assert_equal "1,4,9\n", example.render
+  end
+
   test "comment" do
     template = (<<-EOT).gsub(/ /, "")
     Awesome
