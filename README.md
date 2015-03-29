@@ -1,11 +1,11 @@
 Ate
 ====
 
-Atractive Template Engine for minimalist people
+Inspired by [mote][https://github.com/soveran/mote], Ate is a minimalist framework-agnostic template engine.
 
 ## Introduction
 
-Template engines are things of all days. This days most of them have several hundred (erb) if not thousand (erubis) of lines of code, even slim isn't so slim. So, Ate was written with the requirements of be simple and easy to use.
+Template engines are things of all days. And this days most of them have several hundred (erb) if not thousand (erubis) of lines of code, even slim isn't so slim. So, Ate was written with the requirements of be simple and easy to use.
 
 ## Installation
 
@@ -83,18 +83,22 @@ template.render #=> "The new price is: 40"
 
 ## Contexts
 
-For send a particular context to your template, use the context key
+For send a particular context to your template, use the key `context` and your methods and variables will be called inside of your sent context
 
 ```ruby
-user = User.new "Julio"
-puts user.name #=> "Julio"
-template = Ate.parse("Hi, I'm {{ context.name }}", context: user)
+class User
+  def name
+    "Julio"
+  end
+end
+
+template = Ate.parse("Hi, I'm {{ name }}", context: User.new)
 template.render #=> "Hi, I'm Julio"
 ```
 
-## Using files
+## Templates
 
-In order to use Ate for a view, use the suffix `.ate`, e.g. `public/index.html.ate` and add the route of your file in the parse method. Feel free to use any markup language as HTML
+In order to use Ate in a file template, use the suffix `.ate`, e.g. `public/index.html.ate` and add the path of your view in the parse method. Feel free to use any markup language as HTML
 
 ```html
 <!-- public/index.html.ate -->
