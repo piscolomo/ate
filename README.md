@@ -43,11 +43,9 @@ And you can still doing any ruby thing: blocks, loops, etc.
 % end
 ```
 
-## Assignment
+## Variables
 
 To print a variable just use `{{` and `}}`
-
-## Send Variables
 
 Send a variables as a hash in the parse method to the template so it can get them:
 
