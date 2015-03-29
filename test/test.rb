@@ -94,6 +94,26 @@ scope do
     assert_equal "a\nb\nc\n", parsed.render 
   end
 
+  test "case with multiple lines" do
+    parsed = Ate.parse("Better\nCall\nSaul\n!")
+    assert_equal "Better\nCall\nSaul\n!\n", parsed.render
+  end
+
+  test "quotes" do
+    parsed = Ate.parse("'this' 'awesome' 'quote'")
+    assert_equal "'this' 'awesome' 'quote'\n", parsed.render
+  end
+
+  test "context" do
+    class User
+      attr_accessor :name
+    end
+    user = User.new
+    user.name = "Julio"
+    parsed = Ate.parse("{{ context.name }}", context: user)
+    assert_equal "Julio\n", parsed.render
+  end
+
   test "loading a file" do
     assert_equal "  Beetlejuice\n  Beetlejuice\n  Beetlejuice\n", Ate.parse("test/example.ate").render
   end
