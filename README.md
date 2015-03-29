@@ -5,6 +5,8 @@ Atractive Template Engine for minimalist people
 
 ## Installation
 
+Installing Ate is as simple as running:
+
 ```
 $ gem install ate
 ```
@@ -86,19 +88,18 @@ template.render #=> "Hi, I'm Julio"
 
 ## Using files
 
-Declare you file with .ate extension in the parse method
+In order to use Ate for a view, use the suffix `.ate`, `.erb`, e.g. `public/index.html.ate` and add the route of your file in the parse method. Feel free to use any markup language as HTML
 
-```ruby
-template = Ate.parse("example.ate")
-```
-
-Feel free to use any markup language like HTML
-```ruby
-template = <<-EOT
+```html
+<!-- public/index.html.ate -->
+<body>
   <h1>{{ main_title }}</h1>
   % posts.each do |post|
     <article>...</article>
   % end
-EOT
-parsed = Ate.parse(template, main_title: "h1 title!", posts: array_of_posts)
+</body>
+```
+
+```ruby
+parsed = Ate.parse("public/index.html.ate", main_title: "h1 title!", posts: array_of_posts)
 ```
