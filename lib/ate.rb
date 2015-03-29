@@ -28,7 +28,7 @@ class Ate
         if line =~ /^\s*(%)(.*?)$/
           @output << "#{line.gsub(/^\s*%(.*?)$/, '\1') } \n"
         else
-          @output << "output << \"#{line.gsub(/\{\{([^\r\n]*)\}\}/, '#{\1}') }\n\" \n "
+          @output << "output << %Q|#{line.gsub(/\{\{([^\r\n]*)\}\}/, '#{\1}')}\n| \n "
         end
       end
     end

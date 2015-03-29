@@ -21,7 +21,7 @@ scope do
   end
 
   test "printing string" do
-    parsed = Ate.parse("{{ \"Hello World!\" }}")
+    parsed = Ate.parse('{{ "Hello World!" }}')
     assert_equal "Hello World!\n", parsed.render
   end
 
@@ -119,6 +119,11 @@ scope do
     assert_equal "'this' 'awesome' 'quote'\n", parsed.render
   end
 
+  test "with double quotes" do
+    parsed = Ate.parse("Hi, i'm testing \"double\"\"quotes\"")
+    assert_equal "Hi, i'm testing \"double\"\"quotes\"\n", parsed.render
+  end
+
   test "in a particular context" do
     class User
       attr_accessor :name
@@ -128,6 +133,28 @@ scope do
     parsed = Ate.parse("{{ context.name }}", context: user)
     assert_equal "Julio\n", parsed.render
   end
+
+  test "with html tags" do
+    template = (<<-EOT).gsub(/ {4}/, "")
+    <html>
+      <head>
+        <title>{{ title }}</title>
+      </head>
+    </html>
+    EOT
+
+    parsed = Ate.parse(template, title: "Cool Site!")
+    assert_equal "<html>\n  <head>\n<title>Cool Site!</title>\n  </head>\n</html>\n", parsed.render
+  end
+
+  # test "preserve XML directives" do
+  #   template = (<<-EOT).gsub(/ {4}/, "")
+  #   <?xml "hello" ?>
+  #   EOT
+
+  #   parsed = Ate.parse("probando nuevo mundo \"yeah baby\" ")
+  #   assert_equal "<?xml \"hello\" ?>\n", parsed.render
+  # end
 
   test "loading a file" do
     assert_equal "  Beetlejuice\n  Beetlejuice\n  Beetlejuice\n", Ate.parse("test/example.ate").render
