@@ -1,7 +1,7 @@
 Ate
 ====
 
-Inspired by [mote][https://github.com/soveran/mote], Ate is a minimalist framework-agnostic template engine.
+Inspired by [mote][1], Ate is a minimalist framework-agnostic template engine.
 
 ## Introduction
 
@@ -113,3 +113,5 @@ In order to use Ate in a file template, use the suffix `.ate`, e.g. `public/inde
 ```ruby
 template = Ate.parse("public/index.html.ate", main_title: "h1 title!", posts: array_of_posts)
 ```
+
+[1]: https://github.com/soveran/mote
