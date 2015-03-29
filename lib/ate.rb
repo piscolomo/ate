@@ -23,6 +23,11 @@ class Ate
     proc << "output \n"
     proc << "end"
 
-    eval(proc)
+    @parsed = eval(proc)
+    self
+  end
+
+  def self.render
+    @parsed.call
   end
 end
