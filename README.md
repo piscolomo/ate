@@ -5,16 +5,12 @@ Atractive Template Engine for minimalist people
 
 ## Installation
 
-You can install it by rubygems.
-
 ```
 $ gem install ate
 ```
 
 Usage
 -----
-
-Very similar than other template engines for Ruby:
 
 ```ruby
 template = Ate.parse("Hello World")
