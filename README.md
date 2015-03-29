@@ -15,6 +15,8 @@ Installing Ate is as simple as running:
 $ gem install ate
 ```
 
+Include Ate in your Gemfile with gem 'ate' or require it with require 'ate'.
+
 Usage
 -----
 
@@ -37,7 +39,7 @@ Lines that start with `%` are evaluated as Ruby code.
 % end
 ```
 
-As this is ruby code, you can comment as you has always done
+As this is ruby code, you can comment as you has always done.
 
 ```
 % # I'm a comment.
@@ -83,7 +85,7 @@ template.render #=> "The new price is: 40"
 
 ## Contexts
 
-For send a particular context to your template, use the key `context` and your methods and variables will be called inside of your sent context
+For send a particular context to your template, use the key `context` and your methods and variables will be called inside of your sent context.
 
 ```ruby
 class User
@@ -98,7 +100,7 @@ template.render #=> "Hi, I'm Julio"
 
 ## Templates
 
-In order to use Ate in a file template, use the suffix `.ate`, e.g. `public/index.html.ate` and add the path of your view in the parse method. Feel free to use any markup language as HTML
+In order to use Ate in a file template, use the suffix `.ate`, e.g. `public/index.html.ate` and add the path of your view in the parse method. Feel free to use any markup language as HTML.
 
 ```html
 <!-- public/index.html.ate -->
