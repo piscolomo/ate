@@ -68,14 +68,14 @@ scope do
     % }
     EOT
 
-    example = Ate.parse(template, number: 3, type: 1000)
+    parsed = Ate.parse(template, number: 3, type: 1000)
     number = 3
-    assert_equal "Pika 1000\nPika 1000\nPika 1000\n", example.call
+    assert_equal "Pika 1000\nPika 1000\nPika 1000\n", parsed.call
   end
 
   test "string variables" do
-    example = Ate.parse("Hello {{name}}", name: "Julio")
-    assert_equal "Hello Julio\n", example.call
+    parsed = Ate.parse("Hello {{name}}", name: "Julio")
+    assert_equal "Hello Julio\n", parsed.call
   end
 
   test "mixing int and str variables" do
@@ -85,8 +85,13 @@ scope do
     % }
     EOT
 
-    example = Ate.parse(template, n: 3, pokemon_name: "Pikachu")
-    assert_equal "Pikachu\nPikachu\nPikachu\n", example.call
+    parsed = Ate.parse(template, n: 3, pokemon_name: "Pikachu")
+    assert_equal "Pikachu\nPikachu\nPikachu\n", parsed.call
+  end
+
+  test "recorring an array" do
+    parsed = Ate.parse("% items.each do |item|\n{{item}}\n% end", items: ["a", "b", "c"])
+    assert_equal "a\nb\nc\n", parsed.call 
   end
 
   test "loading a file" do
