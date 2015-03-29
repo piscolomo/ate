@@ -15,9 +15,19 @@ scope do
     assert_equal "\n\n\n", parsed.render
   end
 
+  test "sending nil variable" do
+    parsed = Ate.parse("{{ name }}", name: nil)
+    assert_equal "\n", parsed.render
+  end
+
   test "printing string" do
     parsed = Ate.parse("{{ \"Hello World!\" }}")
     assert_equal "Hello World!\n", parsed.render
+  end
+
+  test "running ruby code in display" do
+    parsed = Ate.parse("{{ 2*2 }}")
+    assert_equal "4\n", parsed.render
   end
 
   test "comment" do
@@ -99,12 +109,12 @@ scope do
     assert_equal "Better\nCall\nSaul\n!\n", parsed.render
   end
 
-  test "quotes" do
+  test "with quotes" do
     parsed = Ate.parse("'this' 'awesome' 'quote'")
     assert_equal "'this' 'awesome' 'quote'\n", parsed.render
   end
 
-  test "context" do
+  test "in a particular context" do
     class User
       attr_accessor :name
     end
