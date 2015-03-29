@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description       = "Ate is a minimalist and fast template engine."
   s.authors           = ["Julio Lopez"]
   s.email             = ["ljuliom@gmail.com"]
-  s.homepage          = "https://github.com/TheBlasfem/ate"
+  s.homepage          = "http://github.com/TheBlasfem/ate"
   s.files = Dir[
     "LICENSE",
     "README.md",
@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
     "test/**/*.rb"
   ]
   s.license           = "MIT"
-  s.add_development_dependency "cutest"
+  s.add_development_dependency "cutest", "1.1.3"
 end
